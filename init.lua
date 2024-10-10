@@ -1,5 +1,5 @@
-require("custom.core")
-require("custom.lazy")
+require("coutz.core")
+require("coutz.lazy")
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
