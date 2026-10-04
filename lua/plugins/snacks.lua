@@ -39,5 +39,14 @@ return {
       end,
       desc = "Htop",
     },
+    {
+      "<leader>to",
+      function()
+        Snacks.terminal.toggle("opencode", {
+          cwd = LazyVim.root(),
+        })
+      end,
+      desc = "Opencode",
+    },
   },
 }
