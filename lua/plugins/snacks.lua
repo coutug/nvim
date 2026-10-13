@@ -1,3 +1,5 @@
+local path = require("util.path")
+
 return {
   "folke/snacks.nvim",
   opts = {
@@ -11,9 +13,10 @@ return {
     },
   },
   keys = {
-    -- new keymaps
+    { "<leader>e", false },
+    { "<leader>E", false },
     {
-      "<leader>tt",
+      "<leader>t",
       function()
         Snacks.terminal.toggle(nil, {
           cwd = LazyVim.root(),
@@ -22,7 +25,16 @@ return {
       desc = "Terminal (Root Dir)",
     },
     {
-      "<leader>tg",
+      "<leader>T",
+      function()
+        Snacks.terminal.toggle(nil, {
+          cwd = path.buffer_dir(),
+        })
+      end,
+      desc = "Terminal (Current Dir)",
+    },
+    {
+      "<leader>lg",
       function()
         Snacks.lazygit({
           cwd = LazyVim.root.git(),
@@ -31,22 +43,31 @@ return {
       desc = "Lazygit (Root Dir)",
     },
     {
-      "<leader>th",
+      "<leader>h",
       function()
-        Snacks.terminal.toggle("htop", {
+        Snacks.terminal.toggle({ "htop" }, {
           cwd = LazyVim.root(),
         })
       end,
       desc = "Htop",
     },
     {
-      "<leader>to",
+      "<leader>oc",
       function()
-        Snacks.terminal.toggle("opencode", {
+        Snacks.terminal.toggle({ "opencode" }, {
           cwd = LazyVim.root(),
         })
       end,
-      desc = "Opencode",
+      desc = "OpenCode (Root Dir)",
+    },
+    {
+      "<leader>OC",
+      function()
+        Snacks.terminal.toggle({ "opencode" }, {
+          cwd = path.buffer_dir(LazyVim.root()),
+        })
+      end,
+      desc = "OpenCode (Current Dir)",
     },
   },
 }
