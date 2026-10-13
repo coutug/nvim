@@ -36,5 +36,4 @@ return {
       "zsh",
     },
   },
-  build = ":tsupdate",
 }
