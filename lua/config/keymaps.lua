@@ -11,3 +11,7 @@ if vim.fn.executable("lazygit") == 1 then
   vim.keymap.del("n", "<leader>gg")
   vim.keymap.del("n", "<leader>gG")
 end
+
+vim.keymap.set("n", "<leader>ze", function()
+  require("util.sops").edit_current_file()
+end, { desc = "SOPS Encrypt and Edit" })
