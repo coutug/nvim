@@ -51,23 +51,5 @@ return {
       end,
       desc = "Htop",
     },
-    {
-      "<leader>oc",
-      function()
-        Snacks.terminal.toggle({ "opencode" }, {
-          cwd = LazyVim.root(),
-        })
-      end,
-      desc = "OpenCode (Root Dir)",
-    },
-    {
-      "<leader>OC",
-      function()
-        Snacks.terminal.toggle({ "opencode" }, {
-          cwd = path.buffer_dir(LazyVim.root()),
-        })
-      end,
-      desc = "OpenCode (Current Dir)",
-    },
   },
 }
