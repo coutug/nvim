@@ -23,7 +23,9 @@ This configuration is based on LazyVim. Most mappings below come from LazyVim; m
 | `<leader>oc` | n | Open OpenCode at project root |
 | `<leader>OC` | n | Open OpenCode in buffer directory |
 | `<leader>ze` | n | Encrypt file if needed, then edit with SOPS |
-| `<leader>mp` | n, Markdown | Toggle Markdown preview |
+| `<leader>mp` | n, Markdown | Toggle Markview preview for current buffer |
+| `<leader>ms` | n, Markdown | Toggle Markview split preview |
+| `<leader>mh` | n, Markdown | Toggle Markview hybrid mode |
 
 **SOPS requirements:** Save the file before using this mapping. If the file is not encrypted, the mapping encrypts it on disk before opening the SOPS editor. `sops` and a writable `/dev/shm` are required. The SOPS editor is isolated and does not load the normal mappings.
 
