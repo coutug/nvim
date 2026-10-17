@@ -1,15 +1,11 @@
 return {
   "smart-splits-nvim/smart-splits.nvim",
+  lazy = false,
   version = "^3.0.0",
-  -- optional: install a backend
   dependencies = {
     {
       "smart-splits-nvim/backend-wezterm",
       commit = "ae840db696791f638c190c3e0534d2ddfcd5e6a7",
-      main = "smart-splits-backend-wezterm",
-      opts = {
-        cli_path = "wezterm",
-      },
     },
   },
   opts = {
