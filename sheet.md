@@ -20,14 +20,40 @@ This configuration is based on LazyVim. Most mappings below come from LazyVim; m
 | `<leader>T` | n | Toggle floating terminal in buffer directory |
 | `<leader>lg` | n | Open Lazygit at Git root (requires `lazygit`) |
 | `<leader>h` | n | Open Htop in a floating terminal (requires `htop`) |
-| `<leader>oc` | n | Open OpenCode at project root |
-| `<leader>OC` | n | Open OpenCode in buffer directory |
+| `<C-.>` | n, i | Toggle OpenCode panel (**Custom**, configured through `opencode.nvim`) |
 | `<leader>ze` | n | Encrypt file if needed, then edit with SOPS |
 | `<leader>mp` | n, Markdown | Toggle Markview preview for current buffer |
 | `<leader>ms` | n, Markdown | Toggle Markview split preview |
 | `<leader>mh` | n, Markdown | Toggle Markview hybrid mode |
 
 **SOPS requirements:** Save the file before using this mapping. If the file is not encrypted, the mapping encrypts it on disk before opening the SOPS editor. `sops` and a writable `/dev/shm` are required. The SOPS editor is isolated and does not load the normal mappings.
+
+## OpenCode (`opencode.nvim`)
+
+OpenCode mappings below use the plugin's default `<leader>o` prefix unless noted. Global mappings work from the editor; input, output, and review mappings apply only in their respective plugin windows. The `opencode` CLI must be available.
+
+| Keys | Mode | Action |
+| --- | --- | --- |
+| `<C-.>` | n, i | Toggle OpenCode panel (**Custom**; replaces plugin's `<leader>og`) |
+| `<leader>oi` | n | Open prompt input |
+| `<leader>oI` | n | Open input in a new session |
+| `<leader>oN` | n | Open a new session tab |
+| `<leader>os` | n | Select session |
+| `<leader>oh` | n | Select from prompt history |
+| `<leader>oT` | n | Open session timeline |
+| `<leader>ot` | n | Toggle focus between editor and panel |
+| `<leader>oy` | v | Add visual selection to context |
+| `<leader>oY` | v | Insert visual selection into prompt |
+| `<leader>o/` | n, x | Quick chat with current context |
+| `<leader>od` | n | Review session changes (OpenCode V2) |
+| `<leader>o]` / `<leader>o[` | n | Next / previous change in review |
+| `<leader>oc` | n | Close review diff (not OpenCode panel) |
+| `<leader>oV` | n | Configure model variant |
+| `<leader>oz` | n | Toggle panel zoom |
+
+In the OpenCode input window: `<CR>` submits in normal mode; `<S-CR>` submits in normal or insert mode; `<C-c>` cancels a running request; `<Esc>` closes panel; `<Up>` / `<Down>` navigate prompt history. In the output window: `[[` / `]]` navigate messages; `i` focuses input; `<C-c>` cancels a running request; `<Esc>` closes panel. Review comments: `c` adds/edits comment, `<C-s>` or `<CR>` saves, `q` or `<Esc>` cancels.
+
+Configured context: visual selections and mentioned files are enabled; automatic current-file and diagnostic context are disabled. Check the context bar before sending.
 
 ## Navigation and editing
 
