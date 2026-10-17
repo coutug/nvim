@@ -34,7 +34,7 @@ This configuration is based on LazyVim. Most mappings below come from LazyVim; m
 | Keys | Mode | Action |
 | --- | --- | --- |
 | `j` / `k` | n, x | Move by screen lines (explicit count uses real lines) |
-| `<C-h/j/k/l>` | n | Move to left / lower / upper / right window |
+| `<C-h/j/k/l>` | n, t | Move left / down / up / right across Neovim windows and WezTerm panes (**Custom**, requires WezTerm backend) |
 | `<C-Up/Down>` | n | Increase / decrease window height |
 | `<C-Left/Right>` | n | Decrease / increase window width |
 | `<A-j>` / `<A-k>` | n, i, v | Move line or selection down / up |
@@ -44,6 +44,10 @@ This configuration is based on LazyVim. Most mappings below come from LazyVim; m
 | `<leader>bd` | n | Close current buffer |
 | `<leader>bo` | n | Close other buffers |
 | `<C-s>` | n, i, x, s | Save file |
+| `<C-S-h/j/k/l>` | — | Resize WezTerm pane left / down / up / right; Neovim window layout is not resized |
+| `<C-Tab>` / `<C-S-Tab>` | — | Activate next / previous WezTerm tab |
+| `<C-x>` / `<C-S-x>` | — | Close current WezTerm pane / tab; confirmation enabled |
+| `<C-v>` | n, x | Native Neovim blockwise visual mode; outside Neovim, activates WezTerm copy mode |
 | `<Esc>` | n, i, s | Exit current mode and clear search highlight |
 | `n` / `N` | n | Next / previous search result, respecting search direction |
 | `<` / `>` | x | Decrease / increase indent while keeping selection |
