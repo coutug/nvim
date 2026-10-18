@@ -8,7 +8,7 @@ return {
     preferred_picker = "snacks",
     preferred_completion = "blink",
     default_global_keymaps = true,
-    default_mode = "build",
+    default_mode = "plan",
     opencode_executable = "opencode",
     keymap = {
       editor = {
