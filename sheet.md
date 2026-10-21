@@ -169,6 +169,21 @@ Press `<M-o>` directly from the OpenCode terminal to hide it, or from Neovim nor
 
 Enabled extras also include Docker, Helm, Nix, Go, and YAML. Their actions depend on file type, installed tools, and available language servers. Generic test and debugger mappings are not included because those extras are disabled.
 
+## Python (`uv.nvim`)
+
+Requires `uv`. The plugin uses its default settings and the `<leader>v` prefix to avoid LazyVim's existing `<leader>x` diagnostics mappings. Snacks provides the command and environment pickers.
+
+| Keys | Mode | Action |
+| --- | --- | --- |
+| `<leader>v` | n, v | Open uv commands picker |
+| `<leader>vr` | n | Run current Python file |
+| `<leader>vs` | v | Run selected Python code |
+| `<leader>vf` | n | Choose and run a Python function |
+| `<leader>ve` | n | Manage Python environment |
+| `<leader>vi` | n | Initialize uv project |
+| `<leader>va` / `<leader>vd` | n | Add / remove package |
+| `<leader>vc` / `<leader>vC` | n | Sync packages / sync all extras, groups, and packages |
+
 ## Disabled or replaced mappings
 
 - `<leader>e` and `<leader>E` open Yazi instead of the Snacks explorer.
