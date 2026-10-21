@@ -20,7 +20,7 @@ This configuration is based on LazyVim. Most mappings below come from LazyVim; m
 | `<leader>T` | n | Toggle floating terminal in buffer directory |
 | `<leader>lg` | n | Open Lazygit at Git root (requires `lazygit`) |
 | `<leader>h` | n | Open Htop in a floating terminal (requires `htop`) |
-| `<C-.>` | n, i | Toggle OpenCode panel (**Custom**, configured through `opencode.nvim`) |
+| `<M-o>` | n, t | Toggle OpenCode floating terminal and resume its last session (**Custom**) |
 | `<leader>ze` | n | Encrypt file if needed, then edit with SOPS |
 | `<leader>mp` | n, Markdown | Toggle Markview preview for current buffer |
 | `<leader>ms` | n, Markdown | Toggle Markview split preview |
@@ -30,30 +30,21 @@ This configuration is based on LazyVim. Most mappings below come from LazyVim; m
 
 ## OpenCode (`opencode.nvim`)
 
-OpenCode mappings below use the plugin's default `<leader>o` prefix unless noted. Global mappings work from the editor; input, output, and review mappings apply only in their respective plugin windows. The `opencode` CLI must be available.
+OpenCode uses its terminal UI, opened in a Snacks floating terminal. The `opencode` CLI and `curl` must be available. Mappings below are custom and use the `<leader>o` prefix. `Select` opens prompt templates and registered commands; it is not a session picker.
 
 | Keys | Mode | Action |
 | --- | --- | --- |
-| `<C-.>` | n, i | Toggle OpenCode panel (**Custom**; replaces plugin's `<leader>og`) |
-| `<leader>oi` | n | Open prompt input |
-| `<leader>oI` | n | Open input in a new session |
-| `<leader>oN` | n | Open a new session tab |
-| `<leader>os` | n | Select session |
-| `<leader>oh` | n | Select from prompt history |
-| `<leader>oT` | n | Open session timeline |
-| `<leader>ot` | n | Toggle focus between editor and panel |
-| `<leader>oy` | v | Add visual selection to context |
-| `<leader>oY` | v | Insert visual selection into prompt |
-| `<leader>o/` | n, x | Quick chat with current context |
-| `<leader>od` | n | Review session changes (OpenCode V2) |
-| `<leader>o]` / `<leader>o[` | n | Next / previous change in review |
-| `<leader>oc` | n | Close review diff (not OpenCode panel) |
-| `<leader>oV` | n | Configure model variant |
-| `<leader>oz` | n | Toggle panel zoom |
+| `<M-o>` | n, t | Toggle OpenCode floating terminal; terminal starts with `opencode --continue` (**Custom**) |
+| `<leader>oa` | n, x | Ask OpenCode, prefilled with `@this: ` |
+| `<leader>os` | n, x | Select a prompt template or registered command |
+| `<leader>or` | n, x | Send an operator range or visual selection to OpenCode |
+| `<leader>ol` | n | Send current line to OpenCode |
 
-In the OpenCode input window: `<CR>` submits in normal mode; `<S-CR>` submits in normal or insert mode; `<C-c>` cancels a running request; `<Esc>` closes panel; `<Up>` / `<Down>` navigate prompt history. In the output window: `[[` / `]]` navigate messages; `i` focuses input; `<C-c>` cancels a running request; `<Esc>` closes panel. Review comments: `c` adds/edits comment, `<C-s>` or `<CR>` saves, `q` or `<Esc>` cancels.
+For operator ranges, follow `<leader>or` with a Vim motion, such as `<leader>orip` for the current paragraph. Use `<leader>oa` on a visual selection to write an instruction before sending. Operator mappings send immediately and support dot-repeat. The native `go` mapping remains unchanged.
 
-Configured context: visual selections and mentioned files are enabled; automatic current-file and diagnostic context are disabled. Check the context bar before sending.
+The plugin targets the most recently updated root session for Neovim's current working directory (`:pwd`), not necessarily the session currently displayed in the TUI. New sessions use OpenCode's configured default agent (`plan` here); existing sessions keep their selected agent. File contexts refer to disk, so save edits before sending. The plugin listens for permission events across the shared OpenCode server, not only the current project; edit previews depend on OpenCode requesting permission.
+
+Press `<M-o>` directly from the OpenCode terminal to hide it, or from Neovim normal mode to show/focus it. The terminal runs `opencode --continue` so a fresh terminal resumes the last session. Hiding the terminal keeps its process alive. Keep `Esc` available to the OpenCode TUI.
 
 ## Navigation and editing
 
