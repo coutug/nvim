@@ -30,21 +30,22 @@ This configuration is based on LazyVim. Most mappings below come from LazyVim; m
 
 ## OpenCode (`opencode.nvim`)
 
-OpenCode uses its terminal UI, opened in a Snacks floating terminal. The `opencode` CLI and `curl` must be available. Mappings below are custom and use the `<leader>o` prefix. `Select` opens prompt templates and registered commands; it is not a session picker.
+OpenCode uses its terminal UI, opened in a Snacks floating terminal. The `opencode` CLI and `curl` must be available. Mappings below are custom and use the `<leader>o` prefix. `Select` opens prompt templates and registered commands; it is not a session picker. Snacks input and picker integrations are enabled by LazyVim; OpenCode ask completion uses its LSP with Blink.
 
 | Keys | Mode | Action |
 | --- | --- | --- |
-| `<M-o>` | n, t | Toggle OpenCode floating terminal; terminal starts with `opencode --continue` (**Custom**) |
+| `<M-o>` | n, t | Toggle and focus OpenCode floating terminal; terminal starts with `opencode --continue` (**Custom**) |
 | `<leader>oa` | n, x | Ask OpenCode, prefilled with `@this: ` |
 | `<leader>os` | n, x | Select a prompt template or registered command |
-| `<leader>or` | n, x | Send an operator range or visual selection to OpenCode |
+| `<leader>or` | n, x | Send an operator range or visual selection to the latest project session |
+| `<leader>op` | x | Open a new session and prefill its TUI prompt with the rendered `@this` context |
 | `<leader>ol` | n | Send current line to OpenCode |
 
-For operator ranges, follow `<leader>or` with a Vim motion, such as `<leader>orip` for the current paragraph. Use `<leader>oa` on a visual selection to write an instruction before sending. Operator mappings send immediately and support dot-repeat. The native `go` mapping remains unchanged.
+For operator ranges, follow `<leader>or` with a Vim motion, such as `<leader>orip` for the current paragraph. The mapping sends immediately and supports dot-repeat. In visual mode it uses the plugin's `operator("@this")`; the TUI input stays empty because the message was already sent. Use `<leader>op` to start a separate session and insert the rendered `@this` reference into the TUI input without submitting it. The prompt-ready check times out with an error if OpenCode does not show its composer. `:OpenCodeSend` sends the current line or an Ex line range to the latest project session; `:OpenCodeDraft` opens a new session with the current line or Ex line range prefilled. The native `go` mapping remains unchanged.
 
 The plugin targets the most recently updated root session for Neovim's current working directory (`:pwd`), not necessarily the session currently displayed in the TUI. New sessions use OpenCode's configured default agent (`plan` here); existing sessions keep their selected agent. File contexts refer to disk, so save edits before sending. The plugin listens for permission events across the shared OpenCode server, not only the current project; edit previews depend on OpenCode requesting permission.
 
-Press `<M-o>` directly from the OpenCode terminal to hide it, or from Neovim normal mode to show/focus it. The terminal runs `opencode --continue` so a fresh terminal resumes the last session. Hiding the terminal keeps its process alive. Keep `Esc` available to the OpenCode TUI.
+Press `<M-o>` directly from the OpenCode terminal to hide it, or from Neovim to show/focus it. The terminal runs `opencode --continue` so a fresh terminal resumes the last session. Hiding the terminal keeps its process alive. Keep `Esc` available to the OpenCode TUI. Lualine shows the `opencode.nvim` server status.
 
 ## Navigation and editing
 
