@@ -81,6 +81,33 @@ return {
       },
     }
 
+    local discovery = require("opencode.server.discovery")
+    local original_registration = discovery.registration
+    discovery.registration = function()
+      local status = vim.fn.system({ "opencode", "service", "status" })
+      local service_url = vim.trim(status)
+      if vim.v.shell_error == 0 and service_url:match("^https?://") then
+        local state_home = vim.env.XDG_STATE_HOME
+        local home = vim.uv.os_homedir() or vim.env.HOME or ""
+        local state_dir = (state_home and state_home ~= "") and vim.fs.joinpath(state_home, "opencode")
+          or vim.fs.joinpath(home, ".local", "state", "opencode")
+
+        for _, path in ipairs(vim.fn.globpath(state_dir, "service*.json", false, true)) do
+          local ok, lines = pcall(vim.fn.readfile, path)
+          if ok and lines and #lines > 0 then
+            local decoded_ok, registration = pcall(vim.json.decode, table.concat(lines, "\n"))
+            if decoded_ok and type(registration) == "table" and registration.url == service_url then
+              return registration
+            end
+          end
+        end
+
+        return nil
+      end
+
+      return original_registration()
+    end
+
     vim.keymap.set({ "n", "t" }, "<M-o>", toggle_terminal, { desc = "Toggle OpenCode terminal" })
 
     vim.keymap.set({ "n", "x" }, "<leader>oa", function()
